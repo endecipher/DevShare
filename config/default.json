@@ -1,0 +1,4 @@
+{
+    "mongouri":"mongodb+srv://TestUser:password-1@cadastros.sxr7p.mongodb.net/DevShare?retryWrites=true&w=majority",
+    "jwtSecret": "MY_SECRET"
+}

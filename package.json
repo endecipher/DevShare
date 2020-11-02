@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start":"node server",
-    "server":"nodemon server" 
+    "server":"nodemon server", 
+    "trace_all" : "node --trace-deprecation --trace-warnings server"
   },
   "author": "Ayan Choudhury",
   "license": "MIT",

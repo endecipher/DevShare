@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "server",
+			"problemMatcher": [],
+			"label": "npm: server",
+			"detail": "nodemon server"
+		},
+		{
+			"type": "npm",
+			"script": "trace_all",
+			"problemMatcher": [],
+			"label": "npm: trace_all",
+			"detail": "node --trace-deprecation --trace-warnings server",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}
