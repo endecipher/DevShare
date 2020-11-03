@@ -3,18 +3,19 @@ const config = require('config');
 
 const db = config.get('mongouri');
 
-const connectDB = async()=>{
+const connectDB = async () => {
     //If any error, catch
-    try{
-        await mongoose.connect(db, 
+    try {
+        await mongoose.connect(db,
             {
-               useNewUrlParser : true,
-               useUnifiedTopology: true,
-               useCreateIndex: true
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useCreateIndex: true,
+                useFindAndModify: false
             }); //async await
         console.log('MongoDB Connected');
     }
-    catch(err){
+    catch (err) {
         console.log(err.message);
         process.exit(1); //Exit Process if failed
     }
