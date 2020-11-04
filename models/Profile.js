@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const ProfileSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId, //The _id Field
-        ref: 'User' //Referencing the User model
+        ref: 'user' //mongoose.model('user',... Thus, the Collection/Document/Model was user, and you have to give the model name here
     },
     company: {
         type: String
