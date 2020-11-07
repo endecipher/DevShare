@@ -4,7 +4,7 @@ const auth = require('../../middleware/auth');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const { check, validationResult } = require('express-validator') // /check deprecated
-
+const axios = require('axios').default;
 //@route GET api/profile/me
 //@desc Get Current User's Profile
 //@access Private (Getting the user id which is there in the token)
@@ -375,6 +375,44 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
 
         await profile.save();
         res.json(profile);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+})
+
+
+//@route GET api/profile/github/:username
+//@desc GET user repos from github
+//@access PUBLIC
+router.get('/github/:username', async (req, res) => {
+    try {
+        const token = process.env.GIT_TOKEN;
+        const options = {
+            url: encodeURI(
+                `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc`
+            ),
+            method: 'GET',
+            headers: {
+                'user-agent': 'node.js',
+                Authorization: `token ${token}`
+            }
+        };
+
+        const response = await axios(options);
+
+        console.log(`${response.status} ${response.statusText}`);
+        if (response.headers) {
+            console.log(response.headers);
+        }
+
+        if (response.status !== 200) {
+            return res.status(404).json({
+                msg: 'No Github profile found'
+            });
+        }
+
+        res.json(response.data);
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
