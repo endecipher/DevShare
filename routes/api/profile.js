@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
+const Post = require('../../models/Post');
 const User = require('../../models/User');
 const Profile = require('../../models/Profile');
 const { check, validationResult } = require('express-validator') // /check deprecated
@@ -25,7 +26,6 @@ router.get('/me', auth, async (req, res) => {
         res.status(500).send('Server Error - Profile');
     }
 });
-
 
 //@route POST api/profile
 //@desc Create or Update Profile
@@ -204,7 +204,11 @@ router.get('/user/:user_id', async (req, res) => {
 router.delete('/', auth, async (req, res) => {
     try {
 
-        //TODO: Remove user's posts
+        //Remove users posts' first
+        await Post.deleteMany({
+            user: req.user.id
+        });
+
         await Profile.findOneAndRemove({
             user: req.user.id
         });

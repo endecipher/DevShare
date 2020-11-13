@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
-    "trace_all": "node --trace-deprecation --trace-warnings server"
+    "trace_all": "node --trace-deprecation --trace-warnings server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Ayan Choudhury",
   "license": "MIT",

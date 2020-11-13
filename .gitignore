@@ -1,2 +1,5 @@
 node_modules/
 .env
+client/node_modules
+_resources
+Notes.txt
